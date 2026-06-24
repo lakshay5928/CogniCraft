@@ -5,6 +5,21 @@ a chain of specialized AI agents (Planner, Generator, Self-Reviewer, Refiner,
 Optimizer, Explainer, dual Reviewers + a Judge, and more) work together,
 visible in real time as a glowing circuit-style pipeline.
 
+## Screenshots
+
+**Home — Clean prompt interface with example chips**
+<img width="1899" height="902" alt="Screenshot 2026-06-23 232245" src="https://github.com/user-attachments/assets/6fca4ca6-9866-44a4-92e5-16d809fdbc46" />
+
+
+**Agent Pipeline — Live circuit-trace node graph mid-run**
+![Agent Pipeline](screenshots/pipeline.png)
+
+**Debate View — Reviewer A, Reviewer B, and Judge Agent with live timeline**
+![Multi-Agent Debate](screenshots/debate.png)
+
+**Result — Syntax-highlighted output with Code / Explanation / Docs / Review / Optimization tabs**
+![Result Output](screenshots/result.png)
+
 ## Features
 
 - **Real-time agent pipeline visualization** — circuit-trace style node graph
