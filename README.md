@@ -5,6 +5,8 @@ a chain of specialized AI agents (Planner, Generator, Self-Reviewer, Refiner,
 Optimizer, Explainer, dual Reviewers + a Judge, and more) work together,
 visible in real time as a glowing circuit-style pipeline.
 
+---
+
 ## Screenshots
 
 **Home — Clean prompt interface with example chips**
@@ -20,6 +22,7 @@ visible in real time as a glowing circuit-style pipeline.
 **Result — Syntax-highlighted output with Code / Explanation / Docs / Review / Optimization tabs**
 <img width="1494" height="854" alt="Screenshot 2026-06-24 124546" src="https://github.com/user-attachments/assets/7953f9b9-d9c3-4475-804e-7fc8e0d51dac" />
 
+---
 
 ## Features
 
@@ -31,6 +34,8 @@ visible in real time as a glowing circuit-style pipeline.
 - **Evaluation suite** — 30-case automated benchmark measuring pass rate, broken down by intent,
   difficulty, and the measurable impact of the self-refinement loop (`npm run eval`)
 - **Eval dashboard** — view the evaluation report visually inside the app (History/Eval Report buttons)
+
+---
 
 ## Why this is "agentic," not just a chatbot wrapper
 
@@ -45,6 +50,8 @@ visible in real time as a glowing circuit-style pipeline.
   they disagreed.
 - **Transparency**: every agent reports its reasoning and a self-rated
   confidence score, streamed live over WebSockets.
+
+---
 
 ## Architecture
 
@@ -66,11 +73,15 @@ Orchestrator Agent (intent detection: generate / debug / explain / review)
      └── explain ───▶ Concept Teacher → Example Generator → Exercise Generator
 ```
 
+---
+
 ## Tech Stack
 
 - **Backend**: Node.js, Express, Socket.IO (real-time agent status streaming)
 - **Frontend**: React (Vite), Tailwind CSS, Socket.IO client
 - **LLM**: Groq API (free tier) serving open-source models (Llama 3.3 70B)
+
+---
 
 ## Setup
 
@@ -120,6 +131,8 @@ by difficulty, and the measured effect of the self-refinement loop.
 Note: this makes ~150-250 LLM calls and may take 5-15 minutes depending on
 Groq's free-tier rate limits.
 
+---
+
 ## Security notes
 
 - The Groq API key lives only in the backend `.env` — never sent to the
@@ -131,6 +144,8 @@ Groq's free-tier rate limits.
 - No arbitrary code execution sandbox is included in this version — by
   design, since safely executing untrusted code requires container-level
   isolation beyond this project's current scope (see Future Scope).
+
+---
 
 ## Future Scope
 
@@ -144,11 +159,15 @@ secure and demo-reliable:
 - Voice input and multi-modal (screenshot → code) input
 - "Project Mode": decomposing a full app request into multiple file-level tasks
 
+---
+
 ## Free deployment path
 
 - Frontend → Vercel or Netlify (free tier)
 - Backend → Render or Railway (free tier, supports WebSockets)
 - LLM → Groq free tier (no cost)
+
+---
 
 ## Author
  
