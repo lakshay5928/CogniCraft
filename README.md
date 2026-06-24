@@ -1,131 +1,78 @@
 # CogniCraft — Multi-Agent AI Coding Assistant
 
-> *Not a chatbot. A pipeline of specialized AI agents that think, debate, self-correct, and explain — streamed live.*
-
-CogniCraft transforms a single coding request into a coordinated chain of specialized AI agents — Planner, Generator, Self-Reviewer, Refiner, Optimizer, Explainer, dual independent Reviewers, and a Judge — each one visible in real time as a glowing, animated circuit-style pipeline on your screen.
-
-Unlike a typical "wrapper" that forwards your prompt to an LLM and returns a response, CogniCraft runs a fully autonomous multi-step pipeline where every agent has a distinct role, reports its own reasoning, and hands off to the next agent — without any further input from you.
-
----
+CogniCraft is an agentic coding assistant: instead of one prompt → one response,
+a chain of specialized AI agents (Planner, Generator, Self-Reviewer, Refiner,
+Optimizer, Explainer, dual Reviewers + a Judge, and more) work together,
+visible in real time as a glowing circuit-style pipeline.
 
 ## Screenshots
 
 **Home — Clean prompt interface with example chips**
-(<Screenshot 2026-06-23 232245.png>)
+<img width="1899" height="902" alt="Screenshot 2026-06-23 232245" src="https://github.com/user-attachments/assets/6fca4ca6-9866-44a4-92e5-16d809fdbc46" />
+
 
 **Agent Pipeline — Live circuit-trace node graph mid-run**
-![Agent Pipeline](screenshots/pipeline.png)
+<img width="1522" height="883" alt="Screenshot 2026-06-24 124515" src="https://github.com/user-attachments/assets/92929c53-93dd-4fd6-a7b0-c8a0851a720e" />
 
 **Debate View — Reviewer A, Reviewer B, and Judge Agent with live timeline**
-![Multi-Agent Debate](screenshots/debate.png)
+<img width="1436" height="906" alt="Screenshot 2026-06-24 124529" src="https://github.com/user-attachments/assets/3b4e9efb-0979-4a73-9ee6-d13bb528b6d2" />
 
 **Result — Syntax-highlighted output with Code / Explanation / Docs / Review / Optimization tabs**
-![Result Output](screenshots/result.png)
+<img width="1494" height="854" alt="Screenshot 2026-06-24 124546" src="https://github.com/user-attachments/assets/7953f9b9-d9c3-4475-804e-7fc8e0d51dac" />
 
----
-
-## What Makes This Different
-
-| Feature | Typical AI Tool | CogniCraft |
-|---|---|---|
-| Agent count | 1 | 15 specialized agents |
-| Self-correction | ❌ | ✅ Auto self-review + refine loop |
-| Multi-agent debate | ❌ | ✅ Reviewer A vs B + Judge |
-| Reasoning visibility | ❌ | ✅ Per-agent rationale + confidence score |
-| Evaluation suite | ❌ | ✅ 30-case automated benchmark |
-| Real-time pipeline UI | ❌ | ✅ Live glowing circuit-trace node graph |
-
----
 
 ## Features
 
-### Real-Time Agent Pipeline Visualization
-Watch the full agent pipeline light up as your request flows through it. Each node in the circuit-style graph glows as its agent activates, dims when done, and passes control to the next — streamed live over WebSockets.
+- **Real-time agent pipeline visualization** — circuit-trace style node graph
+- **Self-correction loop** — Self-Review Agent finds issues, Refiner Agent fixes them automatically
+- **Multi-agent debate** — two independent Reviewer agents + a Judge Agent that synthesizes verdicts
+- **Reasoning transparency** — every agent reports *why*, not just *what*, with a confidence score
+- **Run history** — past prompts and results are persisted and browsable
+- **Evaluation suite** — 30-case automated benchmark measuring pass rate, broken down by intent,
+  difficulty, and the measurable impact of the self-refinement loop (`npm run eval`)
+- **Eval dashboard** — view the evaluation report visually inside the app (History/Eval Report buttons)
 
-### Self-Correction Loop
-The Generator Agent produces initial code. Before you ever see it, the Self-Review Agent checks for bugs, edge cases, and anti-patterns. If issues are found, the Refiner Agent automatically fixes them. You only receive output that has already passed an internal quality gate.
+## Why this is "agentic," not just a chatbot wrapper
 
-### Multi-Agent Debate
-Two independent Reviewer Agents evaluate the same code in parallel:
-- **Reviewer A** focuses on readability and maintainability
-- **Reviewer B** focuses on performance and correctness
-
-A **Judge Agent** then synthesizes both reviews, highlights where they agreed and disagreed, and produces a final verdict — mimicking a real code review process.
-
-### Reasoning Transparency
-Every agent in the pipeline reports:
-- What it decided
-- *Why* it decided it (reasoning chain)
-- A self-rated confidence score (0–100)
-
-All of this streams live to the UI — you see the agents thinking, not just the result.
-
-### Run History
-Every prompt and its full pipeline result is persisted locally. Browse past runs, compare outputs, and re-examine agent reasoning at any time.
-
-### Evaluation Suite
-A 30-case automated benchmark runs the full pipeline against fixed test problems and measures:
-- Overall pass rate
-- Pass rate by intent (generate / debug / review / explain)
-- Pass rate by difficulty (easy / medium / hard)
-- Measured improvement from the self-refinement loop (with vs without Refiner Agent)
-
-```bash
-cd backend
-npm run eval
-```
-
-Once generated, click **"Eval Report"** in the app header to view the results as a visual dashboard inside the app — no separate tool required.
-
----
+- **Multi-step autonomous pipeline**: a single request triggers a chain of
+  agent calls, each one feeding the next, without further user input.
+- **Self-correction loop**: the Self-Review Agent checks the Generator's
+  code, and the Refiner Agent automatically fixes any issues it finds —
+  before the user ever sees the result.
+- **Multi-agent debate**: two independent Reviewer agents (one focused on
+  readability, one on performance/correctness) evaluate the same code, and
+  a Judge Agent synthesizes both into a final verdict — including where
+  they disagreed.
+- **Transparency**: every agent reports its reasoning and a self-rated
+  confidence score, streamed live over WebSockets.
 
 ## Architecture
-
-A single user request is routed through one of four intent flows:
 
 ```
 User Prompt
      │
      ▼
-Orchestrator Agent
-(intent detection: generate / debug / explain / review)
+Orchestrator Agent (intent detection: generate / debug / explain / review)
      │
-     ├── generate ──▶ Planner → Generator → Self-Review → Refiner
-     │                → Optimizer → Explainer/Docs
-     │                → Reviewer A ─┐
-     │                  Reviewer B ─┴──▶ Judge
+     ├── generate ──▶ Planner → Generator → Self-Review → Refiner →
+     │                 Optimizer → Explainer/Docs → Reviewer A ─┐
+     │                                              Reviewer B ─┴─▶ Judge
      │
-     ├── debug ─────▶ Error Detector → Fix Suggester → Optimizer
-     │                → Explainer → Reviewer A/B → Judge
+     ├── debug ─────▶ Error Detector → Fix Suggester → Optimizer →
+     │                 Explainer → Reviewer A/B → Judge
      │
      ├── review ────▶ Reviewer A/B → Judge → Optimizer
      │
      └── explain ───▶ Concept Teacher → Example Generator → Exercise Generator
 ```
 
-**Total agents across all flows: 15**
-
-The pipeline is fully autonomous — once you submit your prompt, each agent calls the next without any further user interaction.
-
----
-
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Backend | Node.js, Express |
-| Real-time streaming | Socket.IO (WebSockets) |
-| Frontend | React (Vite), Tailwind CSS |
-| LLM | Groq API — Llama 3.3 70B (free tier) |
-| Persistence | Local JSON (run history + eval report) |
-
----
+- **Backend**: Node.js, Express, Socket.IO (real-time agent status streaming)
+- **Frontend**: React (Vite), Tailwind CSS, Socket.IO client
+- **LLM**: Groq API (free tier) serving open-source models (Llama 3.3 70B)
 
 ## Setup
-
-### Prerequisites
-- Node.js 18+
-- A free [Groq API key](https://console.groq.com/keys) (no credit card required)
 
 ### 1. Backend
 
@@ -135,17 +82,14 @@ npm install
 cp .env.example .env
 ```
 
-Open `backend/.env` and paste your Groq API key:
-
-```
-GROQ_API_KEY=your_key_here
-```
+Get a free Groq API key at https://console.groq.com/keys and paste it into
+`backend/.env` as `GROQ_API_KEY`.
 
 ```bash
 npm run dev
 ```
 
-Backend starts at `http://localhost:5000`.
+Backend runs on `http://localhost:5000`.
 
 ### 2. Frontend
 
@@ -156,86 +100,56 @@ cp .env.example .env
 npm run dev
 ```
 
-Frontend starts at `http://localhost:5173`.
+Frontend runs on `http://localhost:5173`.
 
-Open the URL in your browser, type a prompt (or click one of the example chips), and watch the agent pipeline light up in real time.
+Open the frontend URL, type a request (or click an example chip), and
+watch the agent pipeline light up in real time.
 
-### 3. Evaluation Suite (optional — strongly recommended for demo/resume)
+### 3. Running the evaluation suite (optional but recommended for resume/demo)
 
 ```bash
 cd backend
 npm run eval
 ```
 
-Runs 30 test cases through the full pipeline. Writes a report to `backend/eval/eval-report.json`. Then click **"Eval Report"** in the app to view it visually.
+This runs 30 fixed test problems through the full pipeline and writes a
+report to `backend/eval/eval-report.json`. Once generated, click **"Eval
+Report"** in the app header to view it visually — pass rate by intent,
+by difficulty, and the measured effect of the self-refinement loop.
 
-> **Note:** The eval suite makes ~150–250 LLM calls. On Groq's free tier, this takes 5–15 minutes depending on rate limits.
+Note: this makes ~150-250 LLM calls and may take 5-15 minutes depending on
+Groq's free-tier rate limits.
 
----
+## Security notes
 
-## Security
-
-- The Groq API key lives exclusively in `backend/.env` — it is never sent to the client or exposed in any API response.
-- Rate limiting: 20 pipeline runs per 15 minutes per IP, to protect free-tier quota.
-- Input is length-capped and validated before reaching any LLM call.
-- `helmet` and scoped CORS headers are applied to the Express server.
-- No arbitrary code execution sandbox is included by design — safely running untrusted code requires container-level isolation (Docker / WebContainers) that is out of scope for this version. See Future Scope below.
-
----
+- The Groq API key lives only in the backend `.env` — never sent to the
+  client.
+- Rate limiting (20 runs / 15 min per IP) protects the free API quota from
+  abuse.
+- Input length is capped and validated before reaching the LLM pipeline.
+- `helmet` and scoped CORS are applied on the Express server.
+- No arbitrary code execution sandbox is included in this version — by
+  design, since safely executing untrusted code requires container-level
+  isolation beyond this project's current scope (see Future Scope).
 
 ## Future Scope
 
-The following features were considered and deliberately deferred to keep the current system secure, stable, and demo-reliable:
+These were considered and deliberately deferred to keep the current system
+secure and demo-reliable:
 
-- **Sandboxed code execution** — Docker or WebContainer isolation with auto-retry on test failure
-- **Long-term agent memory** — vector store for cross-session personalization and context
-- **Multi-model selection** — swap between Qwen, Gemma, DeepSeek, and Llama per agent
-- **Git/PR-aware review** — review code in the context of a diff, not just a snippet
-- **Voice + multimodal input** — describe in voice or paste a screenshot to generate code
-- **Project Mode** — decompose a full app request into file-level tasks assigned to parallel agents
+- Sandboxed code execution (Docker/WebContainer) with auto-retry on failure
+- Long-term agent memory (vector store) for cross-session personalization
+- Multi-model selection (Qwen, Gemma, DeepSeek alongside Llama)
+- Git/PR diff-aware code review
+- Voice input and multi-modal (screenshot → code) input
+- "Project Mode": decomposing a full app request into multiple file-level tasks
 
----
+## Free deployment path
 
-## Free Deployment
-
-| Layer | Platform |
-|---|---|
-| Frontend | Vercel or Netlify (free tier) |
-| Backend | Render or Railway (free tier, WebSocket support included) |
-| LLM | Groq free tier (no cost) |
-
-Total hosting cost: **$0**
-
----
+- Frontend → Vercel or Netlify (free tier)
+- Backend → Render or Railway (free tier, supports WebSockets)
+- LLM → Groq free tier (no cost)
 
 ## Author
 
-**Lakshay Verma**
-
----
-
-## License
-
-```
-MIT License
-
-Copyright (c) 2026 Lakshay Verma
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
+- Lakshay Verma
