@@ -1,0 +1,101 @@
+[
+  {
+    "sessionId": "e1d095c9-db13-4e6a-8eac-4a5c5ccc48df",
+    "prompt": "Write a code in c++ for kruskal algorithm",
+    "intent": "generate",
+    "language": "C++",
+    "summary": "The code is generally well-structured but has significant performance and correctness issues that need to be addressed, along with improvements in readability through better naming and commenting.",
+    "timestamp": "2026-06-24T07:13:46.106Z"
+  },
+  {
+    "sessionId": "395a7257-36b5-43cd-a60d-6608e0123f1d",
+    "prompt": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.\n\nThe overall run time complexity should be O(log (m+n)). Give in JavaScript \n/**\n * @param {number[]} nums1\n * @param {number[]} nums2\n * @return {number}\n */\nvar findMedianSortedArrays ...",
+    "language": null,
+    "summary": "Run completed",
+    "timestamp": "2026-06-23T17:55:44.226Z"
+  },
+  {
+    "sessionId": "b88d1973-b1c3-49d2-907d-5b425a83dca5",
+    "prompt": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.\n\nThe overall run time complexity should be O(log (m+n)). Give in JavaScript give optimize code test case fail",
+    "intent": "generate",
+    "language": "JavaScript",
+    "summary": "The code review is unavailable from both perspectives, resulting in a neutral assessment.",
+    "timestamp": "2026-06-23T17:55:17.539Z"
+  },
+  {
+    "sessionId": "74e5a6a8-e6a2-4a13-a6a6-7059f364cf96",
+    "prompt": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.\n\nThe overall run time complexity should be O(log (m+n)). Give in JavaScript",
+    "intent": "generate",
+    "language": "JavaScript",
+    "summary": "The code is efficient and well-structured, but could benefit from more descriptive variable names, additional comments, and error checking to improve readability and robustness.",
+    "timestamp": "2026-06-23T17:53:41.089Z"
+  },
+  {
+    "sessionId": "0380a21a-7f12-4bc2-b13f-5f2f4d8d82c7",
+    "prompt": "class Solution(object):\n    def findMedianSortedArrays(self, nums1, nums2):\n        \"\"\"\n        :type nums1: List[int]\n        :type nums2: List[int]\n        :rtype: float\n        \"\"\"\n        Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted ar...",
+    "intent": "generate",
+    "language": "Python",
+    "summary": "The code is efficient and correct in terms of performance, but could benefit from improvements in naming conventions and comments to increase readability, with an overall score of 82.5",
+    "timestamp": "2026-06-23T17:50:24.086Z"
+  },
+  {
+    "sessionId": "7690f280-d80b-40e3-9308-72e285ab5680",
+    "prompt": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.\n\nThe overall run time complexity should be O(log (m+n)).",
+    "intent": "generate",
+    "language": "Python",
+    "summary": "The code is generally well-structured but requires improvements in both readability and performance, particularly in handling edge cases and adding descriptive comments and docstrings.",
+    "timestamp": "2026-06-23T17:49:14.793Z"
+  },
+  {
+    "sessionId": "ee292012-ee4e-4f64-816c-0ddb917a4308",
+    "prompt": "give dfs code in c++",
+    "intent": "generate",
+    "language": "C++",
+    "summary": "The code has readability issues and significant performance concerns, including potential memory leaks and inefficient recursion, that need to be addressed for better maintainability and efficiency.",
+    "timestamp": "2026-06-23T05:03:03.527Z"
+  },
+  {
+    "sessionId": "f83313bb-f529-4c7f-8ced-45bbec8e915a",
+    "prompt": "give a dfs code",
+    "language": null,
+    "summary": "Run completed",
+    "timestamp": "2026-06-21T15:44:19.479Z"
+  },
+  {
+    "sessionId": "ba825bd5-c6fe-4f09-8066-2b057392855d",
+    "prompt": "give a dfs code in c++",
+    "language": null,
+    "summary": "Run completed",
+    "timestamp": "2026-06-21T05:45:41.059Z"
+  },
+  {
+    "sessionId": "a1f009a8-2452-48ec-abf1-157183107237",
+    "prompt": "give a dfs code in c",
+    "language": null,
+    "summary": "Run completed",
+    "timestamp": "2026-06-21T05:45:10.798Z"
+  },
+  {
+    "sessionId": "85e151b7-1fe4-4461-8aa4-feaa76abcb53",
+    "prompt": "give a dfs in c",
+    "language": null,
+    "summary": "Run completed",
+    "timestamp": "2026-06-21T05:43:38.719Z"
+  },
+  {
+    "sessionId": "37f19002-738d-4517-91be-c8192adb9372",
+    "prompt": "Give dfs code in c",
+    "intent": "generate",
+    "language": "C",
+    "summary": "The code is generally readable but has significant performance and correctness issues that need to be addressed, with a focus on improving error handling, using more efficient data structures, and implementing cycle detection.",
+    "timestamp": "2026-06-21T05:00:35.097Z"
+  },
+  {
+    "sessionId": "2740e44e-ecd5-4e5c-85df-06b84c9426f2",
+    "prompt": "VITE v5.4.21  ready in 406 ms\n\n  ➜  Local:   http://localhost:5173/\n  ➜  Network: use --host to expose\n  ➜  press h + enter to show help\n10:26:10 am [vite] Internal server error: Failed to resolve import \"./components/HistoryPanel\" from \"src/App.jsx\". Does the file exist?\n  Plugin: vite:import-analy...",
+    "intent": "debug",
+    "language": "javascript",
+    "summary": "The code is generally readable but has potential performance issues that need to be addressed, particularly with regards to unused imports and uncleaned up hooks.",
+    "timestamp": "2026-06-21T04:59:18.012Z"
+  }
+]
