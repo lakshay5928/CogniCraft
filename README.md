@@ -12,13 +12,14 @@ visible in real time as a glowing circuit-style pipeline.
 
 
 **Agent Pipeline — Live circuit-trace node graph mid-run**
-![Agent Pipeline](screenshots/pipeline.png)
+<img width="1522" height="883" alt="Screenshot 2026-06-24 124515" src="https://github.com/user-attachments/assets/92929c53-93dd-4fd6-a7b0-c8a0851a720e" />
 
 **Debate View — Reviewer A, Reviewer B, and Judge Agent with live timeline**
-![Multi-Agent Debate](screenshots/debate.png)
+<img width="1436" height="906" alt="Screenshot 2026-06-24 124529" src="https://github.com/user-attachments/assets/3b4e9efb-0979-4a73-9ee6-d13bb528b6d2" />
 
 **Result — Syntax-highlighted output with Code / Explanation / Docs / Review / Optimization tabs**
-![Result Output](screenshots/result.png)
+<img width="1494" height="854" alt="Screenshot 2026-06-24 124546" src="https://github.com/user-attachments/assets/7953f9b9-d9c3-4475-804e-7fc8e0d51dac" />
+
 
 ## Features
 
